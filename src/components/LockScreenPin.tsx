@@ -1,8 +1,12 @@
 import { MdLteMobiledata } from "react-icons/md";
 import { BsWifi, BsFillShieldLockFill } from "react-icons/bs";
 import { CgBattery } from "react-icons/cg";
+import { useState } from "react";
 
 const LockScreenPin = () => {
+  const [active, setActive] = useState<boolean>(false);
+  const [input, setInput] = useState<string>("");
+
   let listNumbers: Array<string> = [
     "1",
     "2",
@@ -18,15 +22,32 @@ const LockScreenPin = () => {
     "X",
   ];
 
+  function handleClick(keyboard: string): any {
+    setInput((prevInput: any): any => {
+      return `${prevInput}${keyboard}`;
+    });
+  }
+
   const keyboards = listNumbers.map((keyboard, index) => (
     <div key={index}>
       <button
+        onClick={() => {
+          handleClick(keyboard);
+          setActive(true);
+          if (keyboard === "X") {
+            setActive(false);
+            setInput(input.slice(0, input.length - 1));
+          }
+        }}
         type="button"
         className="w-14 h-14 py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-[50%] border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
         {keyboard}
       </button>
     </div>
   ));
+
+  console.log("length: ", input.length);
+  console.log("input: ", input);
 
   return (
     <>
@@ -56,18 +77,33 @@ const LockScreenPin = () => {
           </i>
         </div>
         <p className="mt-4">Confirm your new PIN</p>
-        <div className="password flex justify-center gap-3 mt-6">
-          <div className="w-3 h-3 border-2 rounded-[50%] border-solid border-black"></div>
-          <div className="w-3 h-3 border-2 rounded-[50%] border-solid border-black"></div>
-          <div className="w-3 h-3 border-2 rounded-[50%] border-solid border-black"></div>
-          <div className="w-3 h-3 border-2 rounded-[50%] border-solid border-black"></div>
-        </div>
+        {input.length <= 4 ? (
+          <div className="password flex justify-center gap-3 mt-6">
+            <div
+              className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
+                active ? "bg-black" : ""
+              }`}></div>
+            <div
+              className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
+                active ? "bg-black" : ""
+              }`}></div>
+            <div
+              className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
+                active ? "bg-black" : ""
+              }`}></div>
+            <div
+              className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
+                active ? "bg-black" : ""
+              }`}></div>
+          </div>
+        ) : null}
       </div>
 
       {/* Keyboard */}
       <div className="flex justify-center mt-10">
         <div className="max-w-[196px] flex flex-wrap">{keyboards}</div>
       </div>
+      <p className="mt-12 text-xs">This keeps your account secure</p>
     </>
   );
 };
