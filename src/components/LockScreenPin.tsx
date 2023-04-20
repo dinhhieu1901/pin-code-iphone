@@ -66,7 +66,7 @@ const LockScreenPin = () => {
 
       {/* Keyboard */}
       <div className="flex justify-center mt-10">
-        <div className="max-w-[196px] flex-wrap">{keyboards}</div>
+        <div className="max-w-[196px] flex flex-wrap">{keyboards}</div>
       </div>
     </>
   );
