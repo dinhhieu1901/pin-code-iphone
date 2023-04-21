@@ -62,20 +62,20 @@ const LockScreenPin = () => {
     <>
       {/* Status Bar */}
       <div className="flex justify-between">
-        <div className="time">
+        <div className="time text-sm">
           <a>
             {hours}:{minutes < 10 ? `0${minutes}` : minutes}
           </a>
         </div>
         <div className="options flex gap-1">
           <i>
-            <img src={CellularSignal} alt="" className="w-6 " />
+            <img src={CellularSignal} alt="" className="w-5" />
           </i>
           <i>
-            <img src={Wifi} alt="" className="w-6" />
+            <img src={Wifi} alt="" className="w-5" />
           </i>
           <i>
-            <img src={Battery} alt="" className="w-6 " />
+            <img src={Battery} alt="" className="w-5 " />
           </i>
         </div>
       </div>
