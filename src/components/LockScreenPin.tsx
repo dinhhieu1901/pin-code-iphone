@@ -1,8 +1,5 @@
-import { MdLteMobiledata } from "react-icons/md";
-import { BsWifi2, BsFillShieldLockFill } from "react-icons/bs";
-import { CgBattery } from "react-icons/cg";
+import { BsFillShieldLockFill } from "react-icons/bs";
 import { FiDelete } from "react-icons/fi";
-import { AiFillSignal } from "react-icons/ai";
 import { useState } from "react";
 import "./styles.css";
 import { Battery, CellularSignal, Wifi } from "../assets/image";
