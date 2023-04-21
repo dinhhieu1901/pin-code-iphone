@@ -1,13 +1,15 @@
 import { MdLteMobiledata } from "react-icons/md";
 import { BsWifi, BsFillShieldLockFill } from "react-icons/bs";
 import { CgBattery } from "react-icons/cg";
+import { FiDelete } from "react-icons/fi";
 import { useState } from "react";
 
 const LockScreenPin = () => {
-  const [active, setActive] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
 
-  let listNumbers: Array<string> = [
+  const backSpace: any = <FiDelete />;
+
+  let listNumbers: Array<any> = [
     "1",
     "2",
     "3",
@@ -19,8 +21,10 @@ const LockScreenPin = () => {
     "9",
     "#",
     "0",
-    "X",
+    backSpace,
   ];
+
+  const listIndexs: Array<number> = [1, 2, 3, 4];
 
   function handleClick(keyboard: string): any {
     setInput((prevInput: any): any => {
@@ -33,9 +37,7 @@ const LockScreenPin = () => {
       <button
         onClick={() => {
           handleClick(keyboard);
-          setActive(true);
-          if (keyboard === "X") {
-            setActive(false);
+          if (keyboard === backSpace) {
             setInput(input.slice(0, input.length - 1));
           }
         }}
@@ -77,26 +79,18 @@ const LockScreenPin = () => {
           </i>
         </div>
         <p className="mt-4">Confirm your new PIN</p>
-        {input.length <= 4 ? (
-          <div className="password flex justify-center gap-3 mt-6">
-            <div
-              className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
-                active ? "bg-black" : ""
-              }`}></div>
-            <div
-              className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
-                active ? "bg-black" : ""
-              }`}></div>
-            <div
-              className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
-                active ? "bg-black" : ""
-              }`}></div>
-            <div
-              className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
-                active ? "bg-black" : ""
-              }`}></div>
-          </div>
-        ) : null}
+        <div className="flex justify-center gap-3 mt-6">
+          {listIndexs.map((index) => {
+            return (
+              <div key={index}>
+                <div
+                  className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
+                    input.length >= index ? "bg-black" : ""
+                  }`}></div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Keyboard */}
