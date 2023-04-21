@@ -93,7 +93,7 @@ const LockScreenPin = () => {
                 <div
                   className={` w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
                     input.length >= index ? "bg-black" : ""
-                  } ${input.length > 4 ? "shaking" : ""}`}></div>
+                  } ${input.length >= 4 ? "shaking" : ""}`}></div>
               </div>
             );
           })}
