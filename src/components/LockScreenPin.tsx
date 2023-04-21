@@ -3,6 +3,7 @@ import { BsWifi, BsFillShieldLockFill } from "react-icons/bs";
 import { CgBattery } from "react-icons/cg";
 import { FiDelete } from "react-icons/fi";
 import { useState } from "react";
+import "./styles.css";
 
 const LockScreenPin = () => {
   const [input, setInput] = useState<string>("");
@@ -26,9 +27,13 @@ const LockScreenPin = () => {
 
   const listIndexs: Array<number> = [1, 2, 3, 4];
 
+  const time: any = new Date();
+  let hours: number = time.getHours();
+  let minutes: number = time.getMinutes();
+
   function handleClick(keyboard: string): any {
     setInput((prevInput: any): any => {
-      return `${prevInput}${keyboard}`;
+      return `${prevInput}${keyboard}`.slice(0, 4);
     });
   }
 
@@ -56,7 +61,9 @@ const LockScreenPin = () => {
       {/* Status Bar */}
       <div className="flex justify-between">
         <div className="time">
-          <a>9:41</a>
+          <a>
+            {hours}:{minutes < 10 ? `0${minutes}` : minutes}
+          </a>
         </div>
         <div className="options flex gap-1">
           <i>
@@ -84,9 +91,9 @@ const LockScreenPin = () => {
             return (
               <div key={index}>
                 <div
-                  className={`w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
+                  className={` w-3 h-3 border-2 rounded-[50%] border-solid border-black ${
                     input.length >= index ? "bg-black" : ""
-                  }`}></div>
+                  } ${input.length > 4 ? "shaking" : ""}`}></div>
               </div>
             );
           })}
